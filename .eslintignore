@@ -1,0 +1,8 @@
+public
+node_modules
+build
+.next
+/**/*.d.ts
+tests
+tests/*
+backup
