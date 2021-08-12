@@ -1,0 +1,19 @@
+[build]
+  publish = "out"
+  command = "yarn build"
+
+[[redirects]]
+  from = "/docs/*"
+  to = "https://sniptt.com/docs/:splat"
+
+[[redirects]]
+  from = "/api"
+  to = "https://sniptt.com/api"
+
+[[redirects]]
+  from = "/terms"
+  to = "https://sniptt.com/terms"
+
+[[redirects]]
+  from = "/privacy"
+  to = "https://sniptt.com/privacy"

@@ -1,34 +1,54 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<p align="center">
+  <a href="https://ots.sniptt.com">
+    <img src=".github/assets/ots-web-cover.svg" alt="OTS Web Logo" />
+  </a>
+</p>
 
-## Getting Started
+<div align="center">
+  <a href="https://ots.sniptt.com" alt="Website Status">
+    <img src="https://img.shields.io/website?url=https%3A%2F%2Fots-sniptt.netlify.app" />
+  </a>
+  <a href="https://api.netlify.com/api/v1/badges/9a02edc7-b47d-49f9-97ae-db42d5793e14/deploy-status" alt="Deploy Status">
+  <img src="https://img.shields.io/netlify/9a02edc7-b47d-49f9-97ae-db42d5793e14?label=deployment" />
+</a>
+</div>
 
-First, run the development server:
+<p align="right" style="padding-top:16px">
+  <i>If you use this repo, star it ⭐️</i>
+</p>
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+***
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<p align="center">🔐 <b>Share end-to-end encrypted secrets with others via a one-time URL</b></p>
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+<p align="center">Use to securely share API Keys, Signing secrets, Passwords, etc. with 3rd parties or with your team</p>
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+<p align="center">Secrets are destroyed 💥 once viewed, or after specified expiry</p>
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+***
 
-## Learn More
+## Introduction
 
-To learn more about Next.js, take a look at the following resources:
+This is the fontend for https://ots.sniptt.com.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+It is open source to provide full transparency in how we handle secrets on our website. You can inspect and review the code to verify our end-to-end encryption of secrets.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Features
 
-## Deploy on Vercel
+- 🚀 **[Next.js](https://nextjs.org/)** React Framework
+- 🎨 **[Material UI (v5)](https://next.material-ui.com/)** design system
+- 🌳 **[Ky](https://github.com/sindresorhus/ky)** HTTP client for remote API calls
+- 🔒 **[SubtleCrypto](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto)** for end-to-end encryption
+- 💦 **[animate.css](https://github.com/animate-css/animate.css)** for cross-browser CSS animation support
+- 📗 **[Fontsource](https://github.com/fontsource/fontsource)** for self-hosted fonts
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Development
+1. Install Node 14 or later.
+2. Clone this repository.
+3. Run `yarn` to install the dependencies.
+4. Run `yarn dev` to start the frontend dev server.
+5. Open `http://localhost:3000/` to view the frontend.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## License
+
+See [LICENSE](LICENSE)
