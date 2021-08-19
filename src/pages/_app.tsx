@@ -1,48 +1,32 @@
-import "animate.css"
-import "@fontsource/source-sans-pro/400.css"
-import "@fontsource/source-sans-pro/700.css"
-
-import { CacheProvider, EmotionCache } from "@emotion/react"
-import CssBaseline from "@material-ui/core/CssBaseline"
-import { ThemeProvider } from "@material-ui/core/styles"
+import { ChakraProvider } from "@chakra-ui/react"
+import { CacheProvider } from "@emotion/react"
 import type { AppProps } from "next/app"
 import Head from "next/head"
 import React from "react"
 
-import config from "~/config"
-import SiteContextProvider from "~/contexts/SiteContext"
-import createEmotionCache from "~/styles/createEmotionCache"
-import theme from "~/styles/theme"
+import FontFace from "~/components/FontFace"
+import theme from "~/theme"
+import createEmotionCache from "~/utils/createEmotionCache"
 
-// Client-side cache, shared for the whole session of the user in the browser.
-const clientSideEmotionCache = createEmotionCache()
+const emotionCache = createEmotionCache()
 
-interface Props extends AppProps {
-  emotionCache?: EmotionCache
-}
-
-function OtsWeb(props: Props) {
-  const { Component, emotionCache = clientSideEmotionCache, pageProps } = props
+function App(props: AppProps) {
+  const { Component, pageProps } = props
 
   return (
     <CacheProvider value={emotionCache}>
-      <ThemeProvider theme={theme}>
-        <Head>
-          <meta charSet="utf-8" />
-          <meta
-            name="viewport"
-            content="initial-scale=1.0, width=device-width"
-          />
-        </Head>
+      <Head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
 
-        <SiteContextProvider value={config}>
-          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-          <CssBaseline />
+      <FontFace />
 
-          <Component {...pageProps} />
-        </SiteContextProvider>
-      </ThemeProvider>
+      <ChakraProvider resetCSS theme={theme}>
+        <Component {...pageProps} />
+      </ChakraProvider>
     </CacheProvider>
   )
 }
-export default OtsWeb
+
+export default App

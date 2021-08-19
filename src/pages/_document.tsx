@@ -1,10 +1,17 @@
+import { ColorModeScript } from "@chakra-ui/react"
 import createEmotionServer from "@emotion/server/create-instance"
-import Document, { DocumentContext } from "next/document"
+import Document, {
+  DocumentContext,
+  Head,
+  Html,
+  Main,
+  NextScript,
+} from "next/document"
 import React from "react"
 
-import createEmotionCache from "~/styles/createEmotionCache"
+import createEmotionCache from "~/utils/createEmotionCache"
 
-class OtsDoucment extends Document {
+class CustomDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
     const originalRenderPage = ctx.renderPage
 
@@ -20,6 +27,7 @@ class OtsDoucment extends Document {
       })
 
     const initialProps = await Document.getInitialProps(ctx)
+
     // This is important. It prevents emotion to render invalid HTML.
     // See https://github.com/mui-org/material-ui/issues/26561#issuecomment-855286153
     const emotionStyles = extractCriticalToChunks(initialProps.html)
@@ -27,7 +35,6 @@ class OtsDoucment extends Document {
       <style
         data-emotion={`${style.key} ${style.ids.join(" ")}`}
         key={style.key}
-        // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: style.css }}
       />
     ))
@@ -41,6 +48,27 @@ class OtsDoucment extends Document {
       ],
     }
   }
+
+  render() {
+    return (
+      <Html lang="en">
+        <Head>
+          <link
+            rel="preload"
+            href="/fonts/Inter.woff2"
+            as="font"
+            type="font/woff2"
+            crossOrigin="anonymous"
+          />
+        </Head>
+        <body>
+          <ColorModeScript />
+          <Main />
+          <NextScript />
+        </body>
+      </Html>
+    )
+  }
 }
 
-export default OtsDoucment
+export default CustomDocument

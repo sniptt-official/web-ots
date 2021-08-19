@@ -1,11 +1,10 @@
 import { format } from "date-fns"
 import { useState } from "react"
 
-import { encryptMessage } from "~/libs/crypto"
+import siteConfig from "~/config/siteConfig"
 import api from "~/services/api"
 import { Region } from "~/types"
-
-import useSiteContext from "./useSiteContext"
+import { encryptMessage } from "~/utils/crypto"
 
 export type OneTimeSecret = {
   url: string
@@ -13,7 +12,6 @@ export type OneTimeSecret = {
 }
 
 const useOneTimeSecret = () => {
-  const siteConfig = useSiteContext()
   const [loading, setLoading] = useState(false)
   const [data, setData] = useState<OneTimeSecret | null>(null)
   const [error, setError] = useState<Error | null>(null)
