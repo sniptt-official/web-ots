@@ -10,12 +10,11 @@ import useSiteContext from "~/hooks/useSiteContext"
 export default function OtsReaderCta() {
   const siteConfig = useSiteContext()
 
-  const ctaCodeSnippet = `brew tap sniptt-official/tap
-
-# Just want to send one-time secrets?
+  const ctaCodeSnippet = `# Just want to send one-time secrets?
 brew install ots
 
 # Need to persist secrets?
+brew tap sniptt-official/tap
 brew install snip`
 
   return (

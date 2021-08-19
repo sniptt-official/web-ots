@@ -46,12 +46,26 @@ export default function OtsReader() {
       cmd: true,
     },
     {
-      text: "Decrypting secret... ✅",
+      text: (
+        <span>
+          <Box color="#0dbc79" component="span">
+            ✔️
+          </Box>
+          &nbsp;Successfully decrypted secret
+        </span>
+      ),
       cmd: false,
       repeat: false,
       frames: spinnerFrames.map(function (spinner) {
         return {
-          text: "Decrypting secret..." + spinner,
+          text: (
+            <span>
+              <Box color="info.light" component="span">
+                {spinner}
+              </Box>
+              &nbsp;Decrypting secret...
+            </span>
+          ),
           delay: 80,
         }
       }),

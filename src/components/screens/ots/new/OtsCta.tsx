@@ -23,8 +23,7 @@ export default function OtsCta() {
 
         <Box textAlign="left" maxWidth={720} margin="0 auto">
           <pre>
-            <code>{`brew tap sniptt-official/tap
-brew install ots`}</code>
+            <code>{`brew install ots`}</code>
           </pre>
         </Box>
 
