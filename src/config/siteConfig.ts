@@ -8,7 +8,7 @@ const siteConfig = {
   },
   title: "Sniptt",
   tagline: "The secret manager built for developers",
-  url: `https://sniptt.com`,
+  url: `https://www.sniptt.com`,
   baseUrl: "/",
   repo: {
     url: "https://github.com/sniptt-official/ots",
