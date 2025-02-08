@@ -1,5 +1,6 @@
 export enum Region {
-  EU = "eu-central-1", // Frankfurt.
+  US = "us-east-1", // US East (N. Virginia)
+  EU = "eu-central-1", // Frankfurt
 }
 
 export type CreateOtsRequest = {

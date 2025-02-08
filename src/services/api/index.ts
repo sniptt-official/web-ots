@@ -8,6 +8,17 @@ import {   CreateOtsRequest,
 Region ,
 } from "~/services/api/types"
 
+/**
+ * Default public API keys for each region.
+ *
+ * These are intentionally public and shared across all users to implement
+ * global rate limiting on the service. For higher rate limits or production
+ * usage, users should obtain their own API keys.
+ */
+const API_KEYS = {
+  [Region.US]: "V3aFLdJneB21Cyd5m6peY7TEMy9H13kH3KQUHGnC",
+  [Region.EU]: "xLNkEyYKlS4Fu3ieSZtjY34rG9DeQXeY3a3QvGwA",
+}
 
 const client = ky.extend({
   hooks: {
@@ -15,6 +26,11 @@ const client = ky.extend({
       (request) => {
         request.headers.set("Content-Type", "application/json")
         request.headers.set("X-Client-Name", location.toString())
+        // Get the region from the URL
+        const url = new URL(request.url)
+        const region = url.hostname.split(".")[1] as Region
+
+        request.headers.set("X-API-Key", API_KEYS[region])
       },
     ],
   },
