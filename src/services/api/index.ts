@@ -61,12 +61,49 @@ const createSecret = async ({
     })
     .json<CreateOtsResponse>()
 
-const getSecret = async ({ region = Region.EU, secretId }: GetOtsRequest) =>
-  await client
+/**
+ * Detects if the request is from a preview bot by checking the User-Agent header.
+ * This is a simple but effective way to identify preview requests from major platforms.
+ *
+ * Sources:
+ * - Slack: https://api.slack.com/robots
+ * - Facebook: https://developers.facebook.com/docs/sharing/webmasters/crawler
+ * - Twitter: https://developer.twitter.com/en/docs/twitter-for-websites/cards/guides/getting-started#crawler
+ * - LinkedIn: https://www.linkedin.com/robots.txt
+ */
+function isPreviewBot() {
+  if (typeof window === 'undefined') return false;
+
+  const userAgent = window.navigator.userAgent.toLowerCase();
+
+  // Known preview bot patterns
+  const previewBots = [
+    // Slack preview bots (version-agnostic)
+    'slackbot-linkexpanding',
+    'slack-imgproxy',
+    'slackbot',
+
+    // Other common preview bots
+    'facebookexternalhit',
+    'twitterbot',
+    'linkedinbot',  // From LinkedIn's robots.txt
+  ];
+
+  return previewBots.some(bot => userAgent.includes(bot));
+}
+
+const getSecret = async ({ region = Region.EU, secretId }: GetOtsRequest) => {
+  // Silently skip fetching if it's a preview bot
+  if (isPreviewBot()) {
+    return null;
+  }
+
+  return await client
     .get(`secrets/${secretId}`, {
       prefixUrl: getPrefixUrl(region),
     })
-    .json<GetOtsResponse>()
+    .json<GetOtsResponse>();
+}
 
 const api = {
   createSecret,
