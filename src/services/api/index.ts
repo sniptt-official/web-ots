@@ -1,11 +1,12 @@
 import ky from "ky"
 
 import config from "~/config"
-import {   CreateOtsRequest,
+import {
+  CreateOtsRequest,
   CreateOtsResponse,
   GetOtsRequest,
   GetOtsResponse,
-Region ,
+  Region,
 } from "~/services/api/types"
 
 /**
@@ -72,37 +73,37 @@ const createSecret = async ({
  * - LinkedIn: https://www.linkedin.com/robots.txt
  */
 function isPreviewBot() {
-  if (typeof window === 'undefined') return false;
+  if (typeof window === "undefined") return false
 
-  const userAgent = window.navigator.userAgent.toLowerCase();
+  const userAgent = window.navigator.userAgent.toLowerCase()
 
   // Known preview bot patterns
   const previewBots = [
     // Slack preview bots (version-agnostic)
-    'slackbot-linkexpanding',
-    'slack-imgproxy',
-    'slackbot',
+    "slackbot-linkexpanding",
+    "slack-imgproxy",
+    "slackbot",
 
     // Other common preview bots
-    'facebookexternalhit',
-    'twitterbot',
-    'linkedinbot',  // From LinkedIn's robots.txt
-  ];
+    "facebookexternalhit",
+    "twitterbot",
+    "linkedinbot", // From LinkedIn's robots.txt
+  ]
 
-  return previewBots.some(bot => userAgent.includes(bot));
+  return previewBots.some((bot) => userAgent.includes(bot))
 }
 
 const getSecret = async ({ region = Region.EU, secretId }: GetOtsRequest) => {
-  // Silently skip fetching if it's a preview bot
+  // Skip fetching if it's a preview bot
   if (isPreviewBot()) {
-    return null;
+    throw new Error("Preview request - secret not fetched")
   }
 
   return await client
     .get(`secrets/${secretId}`, {
       prefixUrl: getPrefixUrl(region),
     })
-    .json<GetOtsResponse>();
+    .json<GetOtsResponse>()
 }
 
 const api = {
