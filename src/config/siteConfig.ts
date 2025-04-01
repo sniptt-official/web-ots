@@ -4,7 +4,7 @@ const siteConfig = {
     indexName: "sniptt",
   },
   api: {
-    baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL
+    baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL,
   },
   title: "Sniptt",
   tagline: "The secret manager built for developers",

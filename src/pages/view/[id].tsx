@@ -107,15 +107,30 @@ const ViewOneTimeSecretScreen = () => {
           secretId,
         })
 
-        const plaintext = await decryptMessage(secretPassword, encryptedBytes)
+        const decryptedBytes = await decryptMessage(
+          secretPassword,
+          encryptedBytes,
+        )
 
-        setSecret(plaintext)
+        setSecret(decryptedBytes)
       } catch (error) {
-        console.error(error)
-        setError({
-          name: "ReadSecretFailed",
-          message: (error as Error).message,
-        })
+        // Handle preview bot case specifically
+        if (
+          error instanceof Error &&
+          error.message === "Preview request - secret not fetched"
+        ) {
+          setError({
+            name: "PreviewBotDetected",
+            message:
+              "This secret cannot be viewed by preview bots. Please open the link directly.",
+          })
+        } else {
+          setError({
+            name: "ReadSecretFailed",
+            message:
+              error instanceof Error ? error.message : "Failed to read secret",
+          })
+        }
       } finally {
         setLoading(false)
       }
